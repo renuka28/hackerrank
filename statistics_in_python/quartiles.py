@@ -33,6 +33,7 @@ def quartiles(nums):
 
     """
 
+    nums = sorted(nums)
     second_quartile = mmm.median(nums)
     nums_length = len(nums)
     if nums_length == 0:
@@ -41,11 +42,14 @@ def quartiles(nums):
         # if only one element all quartiles are same
         return (nums[0], nums[0], nums[0])
 
-    upto = (nums_length/2)
-    if nums_length % 2 == 0:
-        upto -= 1
-    first_quartile = mmm.median(nums[0:upto])
-    third_quartile = mmm.median(nums[upto:nums_length])
+    start = 0
+    upto = int(nums_length/2)
+    first_quartile = mmm.median(nums[start:upto])
 
-    print("1st = {}, 2nd = {}, 3rd = {}".format(
-        first_quartile, second_quartile, third_quartile))
+    start = upto
+    if nums_length % 2 != 0:
+        start += 1
+    upto = nums_length
+    third_quartile = mmm.median(nums[start:upto])
+
+    return (first_quartile, second_quartile, third_quartile)
