@@ -14,6 +14,8 @@
 # The first line contains an integer, , denoting the number of elements in the array.
 # The second line contains  space-separated integers describing the array's elements
 
+# see tests.py for driving this code
+
 
 def mean(nums):
     """
@@ -80,13 +82,3 @@ def mode(nums):
         elif(frequency[key] == max):
             modes.append(key)
     return min(modes)
-
-
-n = input("count (n) of integers - ")
-nums_str = input(
-    "enter {} ints separated by space in a single line - ".format(n)).split()
-nums = list(map(int, nums_str))
-
-print("mean = {}".format(mean(nums)))
-print("median = {}".format(median(nums)))
-print("mode = {}".format(mode(nums)))

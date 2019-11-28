@@ -2,7 +2,7 @@
 # weighted mean
 
 
-def weighted_mean(nums, weights):
+def weighted_mean(nums, weights, n=0):
     """
     computes weighted mean for the given list integers and weights. 
 
@@ -16,20 +16,11 @@ def weighted_mean(nums, weights):
     """
     weighted_sum = 0
     weights_sum = 0
+    if(n == 0):
+        n = len(nums)
+
     for i in range(n):
         weighted_sum += nums[i] * weights[i]
         weights_sum += weights[i]
 
     return weighted_sum/weights_sum
-
-
-n = input("count (n) of integers - ")
-nums_str = input(
-    "enter {} ints separated by space in a single line - ".format(n)).split()
-nums = list(map(int, nums_str))
-
-weights_str = input(
-    "enter {} weights separated by space in a single line - ".format(n)).split()
-weights = list(map(int, weights_str))
-
-print(round(weighted_mean(nums, weights), 1))
