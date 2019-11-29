@@ -81,6 +81,7 @@ def inter_quartile_range(nums, freq):
         freq (list of ints): describes frequencies of each element in 'nums'. 
         eg for a given nums [1, 2, 3], freq [2, 2, 1] will result in final array of [1, 1, 2, 2, 1]
     Returns:
+        tuple: (q1, q2, q3) 1st, 2nd and third quartiles for given distribution
         int: inter quartile range (Q3 - Q1)
     """
 
