@@ -137,23 +137,74 @@ def test_list_ops(ls=None, commands=None, ans=None, interactive=None):
     l.test_list_versions(ls.copy(), commands, ans, l.list_ops_3)
 
 
+def test_tuples(integer_list=None, ans=None, interactive=None):
+    # import tuples.get_hash as get_hash
+    import tuples as t
+    if interactive:
+        n = int(input("total number of integers - "))
+        integer_list = map(int, input(
+            "enter {} integers seprated by space = ".format(n)).split())
+
+    if integer_list == None:
+        integer_list = [1, 2, 3, 4]
+        ans = 89902565
+
+    print("testing - test_tuples ---------")
+    print("integer_list = {} ".format(integer_list))
+    ret = t.get_hash(integer_list)
+    print("hash = {}".format(ret), end=" ")
+    print(check_answer(ret, ans))
+    print()
+
+
+def test_validating_uid_regex(uids=None, ans=None, interactive=None):
+    # import tuples.get_hash as get_hash
+    import validating_uid_regex
+    if interactive:
+        n = int(input("total number of uids - "))
+        uids = []
+        for i in range(n):
+            uids.append(input("enter {} uid - ".format(i)))
+
+    if uids == None:
+        import utils
+        import os
+        dir_name = os.path.dirname(os.path.abspath(__file__))
+        uids = utils.listify(os.path.join(dir_name, "data\\ids.txt"))
+        ans = utils.listify(os.path.join(dir_name, "data\\ids_ans.txt"))
+    print("testing - test_validating_uid_regex ---------")
+    # print("uids = {} ".format(uids))
+    all_success = True
+    for i in range(len(uids)):
+        print("{} ".format(uids[i]), end=" ")
+        ret_val = validating_uid_regex.is_valid_uid(uids[i])
+        ret = 'Valid' if ret_val else "Invalid"
+        all_success = (all_success & (ret == ans[i]))
+        print(
+            " answer - {} return value = {} all_success = {}".format(ans[i], ret, all_success), end=" ")
+        print(check_answer(ret, ans[i]))
+    print('ALL SUCCESS' if all_success else "SOME FAILURES")
+
+
 if __name__ == '__main__':
-    # test_find_runner_up()
+    test_find_runner_up()
     # test_find_runner_up(interactive=True)
-    # test_second_lowest_grade()
+    test_second_lowest_grade()
 
-    # gn = [['Harsh', 20.0], ['Beria', 20.0], [
-    #     'Varun', 19.0], ['Kakunami', 19.0], ['Vikas', 21.0]]
-    # a = ['Beria', 'Harsh']
-    # test_second_lowest_grade(grade_names=gn, ans=a)
+    gn = [['Harsh', 20.0], ['Beria', 20.0], [
+        'Varun', 19.0], ['Kakunami', 19.0], ['Vikas', 21.0]]
+    a = ['Beria', 'Harsh']
+    test_second_lowest_grade(grade_names=gn, ans=a)
 
-    # test_finding_the_percentage()
+    test_finding_the_percentage()
     # test_validate_and_parse_email(interactive=True)
-    # emails_in = ['dheeraj <dheeraj-234@gmail.com>', 'crap <itsallcrap>', 'harsh <harsh_1234@rediff.in>', 'kumal <kunal_shin@iop.az>',
-    #              'mattp <matt23@@india.in>', 'harsh <.harsh_1234@rediff.in>', 'harsh <-harsh_1234@rediff.in>']
-    # ans = ['dheeraj <dheeraj-234@gmail.com>',
-    #        'harsh <harsh_1234@rediff.in>', 'kumal <kunal_shin@iop.az>']
+    emails_in = ['dheeraj <dheeraj-234@gmail.com>', 'crap <itsallcrap>', 'harsh <harsh_1234@rediff.in>', 'kumal <kunal_shin@iop.az>',
+                 'mattp <matt23@@india.in>', 'harsh <.harsh_1234@rediff.in>', 'harsh <-harsh_1234@rediff.in>']
+    ans = ['dheeraj <dheeraj-234@gmail.com>',
+           'harsh <harsh_1234@rediff.in>', 'kumal <kunal_shin@iop.az>']
 
-    # test_validate_and_parse_email(emails=emails_in, ans=ans)
+    test_validate_and_parse_email(emails=emails_in, ans=ans)
 
     test_list_ops()
+    test_tuples()
+    test_validating_uid_regex()
