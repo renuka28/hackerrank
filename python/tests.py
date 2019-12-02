@@ -112,6 +112,31 @@ def test_validate_and_parse_email(emails=None, ans=None, interactive=None):
     print("\n".join(ret))
 
 
+def test_list_ops(ls=None, commands=None, ans=None, interactive=None):
+    import lists as l
+    if interactive:
+        n = int(input("count (n) of commands - "))
+        ls = []
+        commands = []
+        for i in range(n):
+            commands.append(input("next command - "))
+
+    if ls == None:
+        ls = []
+        commands = ["insert 0 5", "insert 1 10", "insert 0 6", "print", "remove 6",
+                    "append 9", "append 1",  "sort", "print", "pop", "reverse", "print"]
+        ans = [9, 5, 1]
+
+    print("testing - test_list_ops_1 ---------")
+    l.test_list_versions(ls.copy(), commands, ans, l.list_ops_1)
+
+    print("testing - test_list_ops_2 ---------")
+    l.test_list_versions(ls.copy(), commands, ans, l.list_ops_2)
+
+    print("testing - test_list_ops_3 ---------")
+    l.test_list_versions(ls.copy(), commands, ans, l.list_ops_3)
+
+
 if __name__ == '__main__':
     # test_find_runner_up()
     # test_find_runner_up(interactive=True)
@@ -130,3 +155,5 @@ if __name__ == '__main__':
     #        'harsh <harsh_1234@rediff.in>', 'kumal <kunal_shin@iop.az>']
 
     # test_validate_and_parse_email(emails=emails_in, ans=ans)
+
+    test_list_ops()
