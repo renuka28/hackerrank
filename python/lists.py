@@ -170,16 +170,17 @@ def test_list_versions(ls, commands, ans, func):
     print()
 
 
-ls = []
-commands = ["insert 0 5", "insert 1 10", "insert 0 6", "print", "remove 6",
-            "append 9", "append 1",  "sort", "print", "pop", "reverse", "print"]
-ans = [9, 5, 1]
+if __name__ == '__main__':
+    ls = []
+    commands = ["insert 0 5", "insert 1 10", "insert 0 6", "print", "remove 6",
+                "append 9", "append 1",  "sort", "print", "pop", "reverse", "print"]
+    ans = [9, 5, 1]
 
-print("testing - test_list_ops_1 ---------")
-test_list_versions(ls.copy(), commands, ans, list_ops_1)
+    print("testing - test_list_ops_1 ---------")
+    test_list_versions(ls.copy(), commands, ans, list_ops_1)
 
-print("testing - test_list_ops_2 ---------")
-test_list_versions(ls.copy(), commands, ans, list_ops_2)
+    print("testing - test_list_ops_2 ---------")
+    test_list_versions(ls.copy(), commands, ans, list_ops_2)
 
-print("testing - test_list_ops_3 ---------")
-test_list_versions(ls.copy(), commands, ans, list_ops_3)
+    print("testing - test_list_ops_3 ---------")
+    test_list_versions(ls.copy(), commands, ans, list_ops_3)
