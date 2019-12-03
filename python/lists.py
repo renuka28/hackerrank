@@ -1,3 +1,6 @@
+import utils
+
+
 def list_ops_1(ls: list, command_str: str):
     """ peforms various list operations based on the command list. 
     supported operations are
@@ -154,19 +157,16 @@ def list_ops_3(ls: list, command_str: str):
     return ls
 
 
-def check_answer(ret, ans):
-    return "" if ans == None else (" - " + "SUCCESS" if ret == ans else "FAILURE")
-
-
 def test_list_versions(ls, commands, ans, func):
     ls = ls.copy()
-    print("Initial list =  {} ".format(ls))
+    utils.print_test_info(func.__name__,
+                          ls, "Initial list")
     for command in commands:
         # print("Command = {}".format(command), end=" ")
         ls = func(ls, command)
         # print("List = {}".format(ls))
-    print("final list = {}".format(ls), end=" ")
-    print(check_answer(ls, ans))
+    print("final list = {}".format(ls))
+    utils.check_answer(ls, ans)
     print()
 
 
@@ -175,12 +175,6 @@ if __name__ == '__main__':
     commands = ["insert 0 5", "insert 1 10", "insert 0 6", "print", "remove 6",
                 "append 9", "append 1",  "sort", "print", "pop", "reverse", "print"]
     ans = [9, 5, 1]
-
-    print("testing - test_list_ops_1 ---------")
     test_list_versions(ls.copy(), commands, ans, list_ops_1)
-
-    print("testing - test_list_ops_2 ---------")
     test_list_versions(ls.copy(), commands, ans, list_ops_2)
-
-    print("testing - test_list_ops_3 ---------")
     test_list_versions(ls.copy(), commands, ans, list_ops_3)

@@ -1,12 +1,10 @@
-
-def check_answer(ret, ans):
-    return "" if ans == None else (" - " + "SUCCESS" if ret == ans else "FAILURE")
+import utils
 
 
 def test_find_runner_up(nums=None, ans=None, interactive=None):
     import find_runner_up_score as rup
     if interactive:
-        n = input("count (n) of integers - ")
+        n = utils.readn("integer")
         nums_str = input(
             "enter {} ints separated by space in a single line - ".format(n)).split()
         nums = list(map(int, nums_str))
@@ -15,25 +13,21 @@ def test_find_runner_up(nums=None, ans=None, interactive=None):
         nums = [2, 3, 6, 6, 5]
         ans = 5
 
-    print("testing - find_runner_up_builtin_1 ---------")
-    print("nums = {} ".format(nums))
+    utils.print_test_info("find_runner_up_builtin_1", nums, "nums")
     ret = rup.find_runner_up_builtin_1(nums)
     print("runner up = {}".format(ret), end=" ")
-    print(check_answer(ret, ans))
+    utils.check_answer(ret, ans)
     print()
 
-    print("testing - find_runner_up_builtin_2 ---------")
-    print("nums = {} ".format(nums))
+    utils.print_test_info("find_runner_up_builtin_2", nums, "nums")
     ret = rup.find_runner_up_builtin_2(nums)
     print("runner up = {}".format(ret), end=" ")
-    print(check_answer(ret, ans))
+    utils.check_answer(ret, ans)
     print()
 
-    print("testing - find_runner_up ---------")
-    print("nums = {} ".format(nums))
+    utils.print_test_info("find_runner_up", nums, "nums")
     ret = rup.find_runner_up(nums)
-    print("runner up = {}".format(ret), end=" ")
-    print(check_answer(ret, ans))
+    utils.check_answer(ret, ans)
     print()
 
 
@@ -41,7 +35,7 @@ def test_second_lowest_grade(grade_names=None, ans=None, interactive=None):
     import nested_lists as nl
     if interactive:
         grade_names = []
-        n = int(input("count (n) of students - "))
+        n = utils.readn("students")
         for i in range(n):
             name = input(
                 "enter {} name - ".format(i+1)).strip()
@@ -54,18 +48,18 @@ def test_second_lowest_grade(grade_names=None, ans=None, interactive=None):
             'Tina', 37.2], ['Akriti', 41], ['Harsh', 39]]
         ans = ['Berry', 'Harry']
 
-    print("testing - second_lowest_grade ---------")
-    print("grade and names = {} ".format(grade_names))
+    utils.print_test_info("second_lowest_grade",
+                          grade_names, "grade and names")
     ret = nl.second_lowest_grade(grade_names)
-    print("Second lowest grade = {}".format(ret), end=" ")
-    print(check_answer(ret, ans))
+    print("Second lowest grade = {}".format(ret))
+    utils.check_answer(ret, ans)
     print()
 
 
 def test_finding_the_percentage(grade_names=None, ans=None, interactive=None):
     import finding_the_percentage as fp
     if interactive:
-        n = int(input("count (n) of students - "))
+        n = utils.readn("students")
         grade_names = {}
         for i in range(n):
             name, * \
@@ -81,45 +75,39 @@ def test_finding_the_percentage(grade_names=None, ans=None, interactive=None):
         query_name = "Malika"
         ans = 56.0
 
-    print("testing - finding_the_percentage ---------")
-    print("name and grades = {} ".format(grade_names))
+    utils.print_test_info("finding_the_percentage",
+                          grade_names, "name and grades")
     ret = fp.finding_the_percentage(grade_names, query_name)
-    print("percentage = {}".format(ret), end=" ")
-    print(check_answer(ret, ans))
+    print("percentage = {}".format(ret))
+    utils.check_answer(ret, ans)
     print()
 
 
 def test_validate_and_parse_email(emails=None, ans=None, interactive=None):
     import validating_and_parsing_email as em
     if interactive:
-        n = int(input("count (n) of emails - "))
-        emails = []
-        for i in range(n):
-            emails.append(input(
-                "enter {} name and email separated by space - ".format(i+1)))
+        n = utils.readn("emails")
+        emails = utils.read_n_strings(n, "name and email")
 
     if emails == None:
         emails = ["DEXTER <dexter@hotmail.com>",
                   "VIRUS < virus!@variable.:p >"]
         ans = ["DEXTER <dexter@hotmail.com>"]
 
-    print("testing - test_validate_and_parse_email ---------")
-    print("name and emails = {} ".format(emails))
+    utils.print_test_info("test_validate_and_parse_email",
+                          emails, "name and emails")
     ret = em.validate_and_parse_email(emails)
-    print("valid emails = {}".format(ret), end=" ")
-    print(check_answer(ret, ans))
+    print("valid emails = {}".format(ret))
+    utils.check_answers(ret, ans)
     print()
-    print("\n".join(ret))
 
 
 def test_list_ops(ls=None, commands=None, ans=None, interactive=None):
     import lists as l
     if interactive:
-        n = int(input("count (n) of commands - "))
+        n = utils.readn("commands")
+        commands = utils.read_n_strings(n, " of command")
         ls = []
-        commands = []
-        for i in range(n):
-            commands.append(input("next command - "))
 
     if ls == None:
         ls = []
@@ -127,18 +115,17 @@ def test_list_ops(ls=None, commands=None, ans=None, interactive=None):
                     "append 9", "append 1",  "sort", "print", "pop", "reverse", "print"]
         ans = [9, 5, 1]
 
-    print("testing - test_list_ops_1 ---------")
+    utils.print_test_info("test_list_ops_1", commands, "commands")
     l.test_list_versions(ls.copy(), commands, ans, l.list_ops_1)
 
-    print("testing - test_list_ops_2 ---------")
+    utils.print_test_info("test_list_ops_2", commands, "commands")
     l.test_list_versions(ls.copy(), commands, ans, l.list_ops_2)
 
-    print("testing - test_list_ops_3 ---------")
+    utils.print_test_info("test_list_ops_3", commands, "commands")
     l.test_list_versions(ls.copy(), commands, ans, l.list_ops_3)
 
 
 def test_tuples(integer_list=None, ans=None, interactive=None):
-    # import tuples.get_hash as get_hash
     import tuples as t
     if interactive:
         n = int(input("total number of integers - "))
@@ -149,41 +136,87 @@ def test_tuples(integer_list=None, ans=None, interactive=None):
         integer_list = [1, 2, 3, 4]
         ans = 89902565
 
-    print("testing - test_tuples ---------")
-    print("integer_list = {} ".format(integer_list))
+    utils.print_test_info("test_tuples", integer_list, "integer list")
     ret = t.get_hash(integer_list)
-    print("hash = {}".format(ret), end=" ")
-    print(check_answer(ret, ans))
+    print("hash = {}".format(ret))
+    utils.check_answer(ret, ans)
     print()
 
 
 def test_validating_uid_regex(uids=None, ans=None, interactive=None):
-    # import tuples.get_hash as get_hash
     import validating_uid_regex
     if interactive:
-        n = int(input("total number of uids - "))
-        uids = []
-        for i in range(n):
-            uids.append(input("enter {} uid - ".format(i)))
-
+        n = utils.readn("uids")
+        uids = utils.read_n_strings(n, " uid")
+        ans = [None] * len(uids)
     if uids == None:
         import utils
         import os
         dir_name = os.path.dirname(os.path.abspath(__file__))
         uids = utils.listify(os.path.join(dir_name, "data\\ids.txt"))
         ans = utils.listify(os.path.join(dir_name, "data\\ids_ans.txt"))
-    print("testing - test_validating_uid_regex ---------")
-    # print("uids = {} ".format(uids))
-    all_success = True
+
+    utils.print_test_info("test_validating_uid_regex", uids, "uids")
+    ret_vals = []
     for i in range(len(uids)):
-        print("{} ".format(uids[i]), end=" ")
         ret_val = validating_uid_regex.is_valid_uid(uids[i])
-        ret = 'Valid' if ret_val else "Invalid"
-        all_success = (all_success & (ret == ans[i]))
-        print(
-            " answer - {} return value = {} all_success = {}".format(ans[i], ret, all_success), end=" ")
-        print(check_answer(ret, ans[i]))
-    print('ALL SUCCESS' if all_success else "SOME FAILURES")
+        ret_vals.append('Valid' if ret_val else "Invalid")
+    utils.check_answers(ret_vals, ans)
+    print()
+
+
+def test_swapcase(strings=None, ans=None, interactive=None):
+    import swapcase
+    if interactive:
+        n = utils.readn(" - string count")
+        strings = utils.read_n_strings(n, " string")
+
+    if strings == None:
+        strings = ["TEMP", "Temp", "tEMP", "TemP"]
+        ans = ["temp", "tEMP", "Temp", "tEMp"]
+
+    utils.print_test_info("swapcase", strings, "strings")
+    ret = [swapcase.swap_case_list_comp(s) for s in strings]
+    utils.check_answers(ret, ans)
+    print()
+
+
+def test_split_join_string(strings=None, ans=None, interactive=None):
+    import string_split_join
+    if interactive:
+        n = utils.readn(" - string count")
+        strings = utils.read_n_strings(n, " string")
+
+    if strings == None:
+        strings = ["this is a string", "this is not a string"]
+        ans = ["this-is-a-string", "this-is-not-a-string"]
+
+    utils.print_test_info("split_and_join_easy", strings, "strings")
+    ret_vals = [string_split_join.split_and_join_easy(s) for s in strings]
+    utils.check_answers(ret_vals, ans)
+    print()
+
+    utils.print_test_info("split_and_join", strings, "strings")
+    ret_vals = [string_split_join.split_and_join(s) for s in strings]
+    utils.check_answers(ret_vals, ans)
+    print()
+
+
+def test_string_whats_your_name(strings=None, ans=None, interactive=None):
+    import string_whats_your_name
+    if interactive:
+        strings = utils.read_n_strings(
+            2, "enter first and last name in separate lines \n ")
+
+    if strings == None:
+        strings = ["Ross", "Taylor"]
+        ans = "Hello Ross Taylor! You just delved into python."
+
+    utils.print_test_info("string_whats_your_name",
+                          strings, "first and last names")
+    ret_vals = string_whats_your_name.print_full_name(strings[0], strings[1])
+    utils.check_answer(ret_vals, ans)
+    print()
 
 
 if __name__ == '__main__':
@@ -198,13 +231,16 @@ if __name__ == '__main__':
 
     test_finding_the_percentage()
     # test_validate_and_parse_email(interactive=True)
+
     emails_in = ['dheeraj <dheeraj-234@gmail.com>', 'crap <itsallcrap>', 'harsh <harsh_1234@rediff.in>', 'kumal <kunal_shin@iop.az>',
                  'mattp <matt23@@india.in>', 'harsh <.harsh_1234@rediff.in>', 'harsh <-harsh_1234@rediff.in>']
     ans = ['dheeraj <dheeraj-234@gmail.com>',
            'harsh <harsh_1234@rediff.in>', 'kumal <kunal_shin@iop.az>']
-
     test_validate_and_parse_email(emails=emails_in, ans=ans)
 
     test_list_ops()
     test_tuples()
     test_validating_uid_regex()
+    test_swapcase()
+    test_split_join_string()
+    test_string_whats_your_name()
